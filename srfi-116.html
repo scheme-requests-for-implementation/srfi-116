@@ -152,7 +152,7 @@ John Cowan
 <p>
 To see an explanation of
 each status that a SRFI can hold, see <a
-href="http://srfi.schemers.org/srfi-process.html">here</a>.
+href="http://srfi.speechcode.com/srfi-process.html">here</a>.
 
 To provide input on this SRFI, please
 <a href="mailto:srfi minus 116 at srfi dot schemers dot org">mail to
@@ -164,7 +164,7 @@ list</a>.
 
 You can access
 post-finalization messages via
-<a href="http://srfi.schemers.org/srfi-111/post-mail-archive/maillist.html">
+<a href="http://srfi.speechcode.com/srfi-111/post-mail-archive/maillist.html">
 the archive of the mailing list</a>.
 </p>
 
@@ -223,7 +223,7 @@ Scheme currently does not provide immutable pairs corresponding to its existing 
 
 <p>Because of the Liskov Substitution Principle, it is not possible to treat mutable pairs as either a subtype or a supertype of mutable ones; they must be distinct, and if operations are to apply to both, they can do so only by <em>ad hoc</em> polymorphism of the kind that Scheme traditionally avoids for several reasons, including clarity, efficiency, and flexibility.  This proposal, therefore, treats mutable and immutable pairs separately, while allowing easy conversion from one to the other.</p>
 <p>
-Rather than attempting to design this library from scratch, I have chosen the conservative option of modifying <a href="http://srfi.schemers.org/srfi-1/srfi-1.html">SRFI 1</a>.  Consequently, most of the rationale given in that document applies to this one as well.  I have made the following changes:</p>
+Rather than attempting to design this library from scratch, I have chosen the conservative option of modifying <a href="http://srfi.speechcode.com/srfi-1/srfi-1.html">SRFI 1</a>.  Consequently, most of the rationale given in that document applies to this one as well.  I have made the following changes:</p>
 
 <ul><li>Removed all linear-update procedures ending in <code>!</code></li>
 <li>Removed all references to circular lists (there will be a future SRFI for immutable bidirectional cycles).</li>
@@ -2373,7 +2373,7 @@ This procedure allows a procedure to be applied to an ilist.
 <!--========================================================================-->
 <h1><a name="Acknowledgements">Acknowledgements</a></h1>
 <p>
-Without the work of Olin Shivers on <a href="http://srfi.schemers.org/srfi-1/srfi-1.html">SRFI 1</a>,
+Without the work of Olin Shivers on <a href="http://srfi.speechcode.com/srfi-1/srfi-1.html">SRFI 1</a>,
 this SRFI would not exist. Everyone acknowledged there is transitively acknowledged here.
 This is not to imply that either Olin or anyone else necessarily endorses the final
 results, of course. 
@@ -2386,19 +2386,19 @@ results, of course.
 </p><dl>
 <dt class="biblio">This document, in HTML:
 </dt><dd><a href="./srfi-116_files/srfi-116.html">
-    http://srfi.schemers.org/srfi-116/srfi-116.html</a>
+    http://srfi.speechcode.com/srfi-116/srfi-116.html</a>
 
 </dd><dt class="biblio">Source code for the reference implementation:
-</dt><dd><a href="http://srfi.schemers.org/srfi-116/ilists.tar.gz">
-    http://srfi.schemers.org/srfi-116/ilists.tar.gz</a>
+</dt><dd><a href="http://srfi.speechcode.com/srfi-116/ilists.tar.gz">
+    http://srfi.speechcode.com/srfi-116/ilists.tar.gz</a>
 
 </dd><dt class="biblio">Archive of SRFI-116 discussion-list email:
-</dt><dd><a href="http://srfi.schemers.org/srfi-116/mail-archive/maillist.html">
-    http://srfi.schemers.org/srfi-116/mail-archive/maillist.html</a>
+</dt><dd><a href="http://srfi.speechcode.com/srfi-116/mail-archive/maillist.html">
+    http://srfi.speechcode.com/srfi-116/mail-archive/maillist.html</a>
 
 </dd><dt class="biblio">SRFI web site:
-</dt><dd><a href="http://srfi.schemers.org/">
-    http://srfi.schemers.org/</a>
+</dt><dd><a href="http://srfi.speechcode.com/">
+    http://srfi.speechcode.com/</a>
 </dd></dl>
 
 
