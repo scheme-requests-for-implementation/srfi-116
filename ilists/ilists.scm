@@ -1,4 +1,4 @@
-(module ilists ()
+(module srfi-116 ()
   (import scheme)
   (import (only chicken
     include define-record-type define-record-printer error))
@@ -28,6 +28,6 @@
   (export pair->ipair ipair->pair list->ilist ilist->list)
   (export tree->itree itree->tree gtree->itree gtree->tree)
   (export iapply)
-  (include "ilists-base.scm")
-  (include "ilists-impl.scm")
+  (include "ilists/ilists-base.scm")
+  (include "ilists/ilists-impl.scm")
 )
