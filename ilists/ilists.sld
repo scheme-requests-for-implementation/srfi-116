@@ -1,4 +1,4 @@
-(define-library (ilists)
+(define-library (srfi-116)
   (import (scheme base))
   (export iq)
   (export ipair ilist xipair ipair* make-ilist ilist-tabulate iiota)

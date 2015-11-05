@@ -1,0 +1,18 @@
+;; -*- Hen -*-
+
+((egg "srfi-116.egg")
+ ; List of files that should be bundled alongside egg
+ (files "ilists"
+        "tests"
+        "srfi-116.setup"
+        "srfi-116.meta"
+        "srfi-116.scm"
+        "LICENSE")
+
+ (license "BSD")
+ (category data)
+ (test-depends test)
+ (author "John Cowan")
+ (email "cowan@ccil.org")
+ (repo "https://github.com/scheme-requests-for-implementation/srfi-116")
+ (synopsis "Immutable Lists."))

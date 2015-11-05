@@ -1,5 +1,5 @@
 (use test)
-(use ilists)
+(use srfi-116)
 
 (test-group "ilists"
 
@@ -204,7 +204,7 @@
      (lambda (x) (+ x 1))
      1))
   (test squares
-    (iunfold-right zero? 
+    (iunfold-right zero?
       (lambda (x) (* x x))
       (lambda (x) (- x 1))
       10))
