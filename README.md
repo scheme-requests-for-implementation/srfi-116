@@ -28,5 +28,5 @@ runner which merely includes the tests found in the `ilists/` directory.
 
 ## License
 
-Provided under a single clause BSD license, Copyright (C) John Cowan 2015. See
-LICENSE for full details.
+Provided under a single clause BSD license, Copyright (C) John Cowan (2015,
+2016). See LICENSE for full details.
