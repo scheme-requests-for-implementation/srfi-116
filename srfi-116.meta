@@ -9,7 +9,7 @@
         "tests/run.scm"
         "srfi-116.setup"
         "srfi-116.meta"
-        "srfi-116.scm"
+        "srfi-116.release-info"
         "LICENSE"
         "README.md")
 
