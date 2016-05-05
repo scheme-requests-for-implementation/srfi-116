@@ -4,4 +4,4 @@
 
 (repo git "git://github.com/scheme-requests-for-implementation/srfi-116.git")
 (uri targz "https://codeload.github.com/scheme-requests-for-implementation/srfi-116/tar.gz/CHICKEN-{egg-release}" whole-repo)
-(release "1.0")
+(release "1.0" whole-repo)
