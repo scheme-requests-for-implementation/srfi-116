@@ -2,17 +2,22 @@
 
 ((egg "srfi-116.egg")
  ; List of files that should be bundled alongside egg
- (files "ilists"
-        "tests"
+ (files "ilists/ilists.scm"
+        "ilists/ilists-base.scm"
+        "ilists/ilists-impl.scm"
+        "ilists/ilists-test.scm"
+        "tests/run.scm"
         "srfi-116.setup"
         "srfi-116.meta"
         "srfi-116.scm"
-        "LICENSE")
+        "LICENSE"
+        "README.md")
 
  (license "BSD")
  (category data)
  (test-depends test)
  (author "John Cowan")
+ (maintainer "Jeremy Steward")
  (email "cowan@ccil.org")
  (repo "https://github.com/scheme-requests-for-implementation/srfi-116")
  (synopsis "Immutable Lists."))
