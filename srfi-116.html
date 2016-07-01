@@ -168,6 +168,11 @@ post-finalization messages via
 the archive of the mailing list</a>.
 </p>
 
+<p><b>Post-finalization note:</b>  One sentence has been added to the section
+"The procedures" below, and several errors in the examples have been silently
+corrected.  These do not affect the conformance conditions for this SRFI.</p>
+
+
 <ul>
     <li>Received: <a
     href="http://srfi.schemers.org/srfi-116/srfi-116-1.1.html">2013/05/31</a></li>
@@ -411,9 +416,12 @@ scalar values to an ilist procedure by accident,
 <h1><a name="Quotation">Quotation</a></h1>
 <p>The various Scheme standards permit, but do not require,
 Scheme implementations to treat quoted pairs and lists as immutable.
-Thus whereas the expression <code>(set-car! (list 1 2 3) 10)</code>
-evaluates to the list <code>(10 2 3)</code>, the expression
-<code>(set-car! '(1 2 3) 10)</code> is not portable and in fact an error.</p>
+Thus whereas the expression
+<code>(let ((foo (list 1 2 3))) (set-car! foo 10) foo)</code>
+evaluates to <code>(10 2 3)</code>, the value of
+ <code>(let ((foo '(1 2 3))) (set-car! foo 10) foo)</code>
+is not portable, and is in fact an error.
+</p>
 
 <p>This SRFI recommends that implementations that provide both this SRFI and
 immutable quotations should cause quotations to return the same immutable
@@ -469,6 +477,11 @@ The templates given below obey the following conventions for procedure formals:
 <p>
 It is an error to pass a dotted ilist to a procedure not
 defined to accept such an argument.
+</p>
+
+<p><b>Added after finalization:</b>  Implementers should extend the Scheme
+predicate <code>equal?</code> to descend into immutable pairs in the same
+way that it descends into mutable pairs.
 
 <!--========================================================================-->
 </p><h2><a name="Constructors">Constructors</a></h2>
@@ -1704,14 +1717,14 @@ representatives:
 (iany  even? (iq 1 7 3))	=&gt; #f
 
 ;; Failure is error on a dotted ilist.
-(ifind even? (ipair (1 (ipair 3 x)))	=&gt; error
-(iany  even? (ipair (1 (ipair 3 x)))	=&gt; error
+(ifind even? (ipair 1 (ipair 3 'x)))	=&gt; error
+(iany  even? (ipair 1 (ipair 3 'x)))	=&gt; error
 
 ;; The dotted ilist contains an element satisfying the search.
 ;; This case is not specified — it could be success, an error, 
 ;; or some third possibility.
-(ifind even? (ipair (1 (ipair 2 x)))	=&gt; error/undefined
-(iany  even? (ipair (1 (ipair 2 x))))	=&gt; error/undefined ; success, error or other.
+(ifind even? (ipair 1 (ipair 2 'x)))	=&gt; error/undefined
+(iany  even? (ipair 1 (ipair 2 'x)))	=&gt; error/undefined ; success, error or other.
 
 </pre>
 
@@ -1961,9 +1974,10 @@ and <code>ibreak</code> breaks the ilist at the first element satisfying
 <pre class="code-example">    (imemq 'a (iq a b c))           =&gt;  (a b c)
     (imemq 'b (iq a b c))           =&gt;  (b c)
     (imemq 'a (iq b c d))           =&gt;  #f
-    (imemq (ilist 'a) (iq b (a) c)) =&gt;  #f
-    (imember (ilist 'a)
-            (iq b (a) c))           =&gt;  ((a) c)
+    (imemq (list 'a)
+            (ilist 'b '(a) 'c))     =&gt;  #f
+    (imember (list 'a)
+            (ilist 'b '(a) 'c)))    =&gt;  ((a) c)
     (imemq 101 (iq 100 101 102))    =&gt;  *unspecified*
     (imemv 101 (iq 100 101 102))    =&gt;  (101 102)
 </pre>
@@ -2111,7 +2125,7 @@ in these cases, immutable maps or some other alternative should be employed.
 (iassq 'b e)                               =&gt;  (b 2)
 (iassq 'd e)                               =&gt;  #f
 (iassq (ilist 'a) (iq ((a)) ((b)) ((c))))  =&gt;  #f
-(iassoc (ilist 'a) (iq ((a)) ((b)) ((c)))) =&gt;  ((a))
+(iassoc '(a) (ilist '((a)) '((b)) '((c)))) =&gt;  ((a))
 (iassq 5 (iq (2 3) (5 7) (11 13)))	   =&gt;  *unspecified*
 (iassv 5 (iq (2 3) (5 7) (11 13)))	   =&gt;  (5 7)
 </pre>
