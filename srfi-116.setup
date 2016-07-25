@@ -3,10 +3,10 @@
 (define (dynld-name fn)
   (make-pathname #f fn ##sys#load-dynamic-extension))
 
-(compile -O3 -d0 -s -J ilists/ilists.scm -o srfi-116.so)
+(compile -O3 -d0 -s -J ilists/ilists.scm -o ,(dynld-name "srfi-116"))
 (compile -O2 -d0 -s srfi-116.import.scm)
 
 (install-extension
  'srfi-116
  `(,(dynld-name "srfi-116") ,(dynld-name "srfi-116.import"))
- `((version "1.2")))
+ `((version "1.3")))
