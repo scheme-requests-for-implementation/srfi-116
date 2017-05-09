@@ -292,13 +292,13 @@
 		  (others (cdr others)))
 	      (if (eq? ilist-a ilist-b)	; EQ? => LIST=
 		  (lp1 ilist-b others)
-		  (let lp2 ((ilist-a ilist-a) (ilist-b ilist-b))
-		    (if (null-ilist? ilist-a)
-			(and (null-ilist? ilist-b)
+		  (let lp2 ((pair-a ilist-a) (pair-b ilist-b))
+		    (if (null-ilist? pair-a)
+			(and (null-ilist? pair-b)
 			     (lp1 ilist-b others))
-			(and (not (null-ilist? ilist-b))
-			     (= (icar ilist-a) (icar ilist-b))
-			     (lp2 (icdr ilist-a) (icdr ilist-b)))))))))))
+			(and (not (null-ilist? pair-b))
+			     (= (icar pair-a) (icar pair-b))
+			     (lp2 (icdr pair-a) (icdr pair-b)))))))))))
 			
 
 

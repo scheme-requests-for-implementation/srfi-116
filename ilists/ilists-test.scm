@@ -30,6 +30,7 @@
   (test-assert (not-ipair? 'a))
   (test-assert (not (not-ipair? (ipair 'a 'b))))
   (test-assert (ilist= = (iq 1 2 3) (iq 1 2 3)))
+  (test-assert (ilist= = (iq 1 2 3) (iq 1 2 3) (iq 1 2 3)))
   (test-assert (not (ilist= = (iq 1 2 3 4) (iq 1 2 3))))
   (test-assert (not (ilist= = (iq 1 2 3) (iq 1 2 3 4))))
   (test-assert (ilist= = (iq 1 2 3) (iq 1 2 3)))
