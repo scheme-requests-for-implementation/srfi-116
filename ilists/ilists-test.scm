@@ -14,6 +14,9 @@
   (test (iq c c c c) (make-ilist 4 'c))
   (test (iq 0 1 2 3) (ilist-tabulate 4 values))
   (test (iq 0 1 2 3 4) (iiota 5))
+  (define abc-copy (ilist-copy abc))
+  (test abc abc-copy)
+  (test-assert (not (eq? abc abc-copy)))
 ) ; end ilists/constructors
 
 (test-group "ilists/predicates"
