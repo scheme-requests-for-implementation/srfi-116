@@ -948,7 +948,7 @@
 (define (ibreak  pred lis) (ispan  (lambda (x) (not (pred x))) lis))
 (define (ievery pred lis1 . lists)
   (check-arg procedure? pred ievery)
-  (if (ipair? lists)
+  (if (pair? lists)
 
       ;; N-ary case
       (receive (heads tails) (%cars+cdrs (ipair lis1 lists))

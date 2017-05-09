@@ -291,7 +291,7 @@
   (test #t (iany < (iq 3 1 4 1 5) (iq 2 7 1 8 2)))
   (test #t (ievery integer? (iq 1 2 3 4 5)))
   (test #f (ievery integer? (iq 1 2 3 4.5 5)))
-  (test #t (ievery < (iq 1 2 3) (iq 4 5 6)))
+  (test #t (ievery (lambda (a b) (< a b)) (iq 1 2 3) (iq 4 5 6)))
   (test 2 (ilist-index even? (iq 3 1 4 1 5 9)))
   (test 1 (ilist-index < (iq 3 1 4 1 5 9 2 5 6) (iq 2 7 1 8 2)))
   (test #f (ilist-index = (iq 3 1 4 1 5 9 2 5 6) (iq 2 7 1 8 2)))
