@@ -3,7 +3,7 @@
   (import (only chicken
     include define-record-type define-record-printer error))
   (export iq)
-  (export ipair ilist xipair ipair* make-ilist ilist-tabulate iiota)
+  (export ipair ilist xipair ipair* make-ilist ilist-copy ilist-tabulate iiota)
   (export ipair?)
   (export proper-ilist? ilist? dotted-ilist? not-ipair? null-ilist? ilist=)
   (export icar icdr ilist-ref)
