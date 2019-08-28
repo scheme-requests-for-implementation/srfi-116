@@ -208,7 +208,7 @@ corrected.  These do not affect the conformance conditions for this SRFI.</p>
   </li><li><a href="#Searching">Searching</a>
   </li><li><a href="#Deletion">Deletion</a>
   </li><li><a href="#ImmutableassociationLists">Immutable association lists</a>
-  </li><li><a href="#Replacers">Replacers</a>
+  </li><li><a href="#Replacement">Replacement</a>
   </li><li><a href="#Conversion">Conversion</a>
   </li><li><a href="#ProcedureApplication">Procedure application</a>
   </li><li><a href="#Comparators">Comparators</a>
@@ -693,7 +693,7 @@ way that it descends into mutable pairs.
 ==== ilist=
 ============================================================================-->
 </dd><dt class="proc-def">
-<a name="list="></a>
+<a name="ilist="></a>
 <code class="proc-def">ilist=</code><var> elt= ilist<sub>1</sub> ... -&gt; boolean</var>
 </dt><dd class="proc-def">
     Determines ilist equality, given an element-equality procedure.
@@ -777,6 +777,7 @@ way that it descends into mutable pairs.
 ============================================================================-->
 <a name="icaar"></a>
 <a name="icadr"></a>
+<a name="icddadr"></a>
 <a name="icdddar"></a>
 <a name="icddddr"></a>
 </dd><dt class="proc-def1"><code class="proc-def">icaar</code><var> ipair -&gt; value</var>
@@ -881,7 +882,7 @@ way that it descends into mutable pairs.
 <a name="idrop"></a>
 <code class="proc-def">idrop</code><var> x i -&gt; object</var>
 </dt><dt class="proc-defn">
-<a name="idrop"></a>
+<a name="ilist-tail"></a>
 <code class="proc-def">ilist-tail</code><var> x i -&gt; object</var>
 </dt><dd class="proc-def">
     <code>itake</code> returns the first <var>i</var> elements of ilist <var>x</var>.<br/>
