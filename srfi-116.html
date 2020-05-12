@@ -161,15 +161,19 @@ John Cowan
       <li>Draft: 2014-09-08--2014-11-08</li>
       <li>Final: <a href="https://srfi.schemers.org/srfi-116/srfi-116-1.5.html">2014-11-28</a></li>
       <li>Revised to fix errata: 2016-01-20</li>
-      <li><b>Post-finalization note (added 2016-07-01):</b>  One
+      <li><b>Post-finalization note #1 (added 2016-07-01):</b>  One
 	sentence has been added to the section "The procedures" below,
 	and several errors in the examples have been silently
 	corrected.  These do not affect the conformance conditions for
 	this SRFI.</li>
-      <li><b>Post-finalization note (added 2020-03-27):</b>
+      <li><b>Post-finalization note #2 (added 2020-03-27):</b>
 	The author of this SRFI recommends that implementers used <a href="https://srfi.schemers.org/srfi-128/">SRFI
 	128</a> comparators rather than <a href="https://srfi.schemers.org/srfi-114/">SRFI
 	114</a> comparators.</li>
+      <li><b>Post-finalization note #3 (added 2020-05-11):</b>
+        Some clarifications have been made to the informative text.
+        Removed text looks like <del>this</del>;
+        added text looks like <ins>this</ins>.</li>
 </ul>
 
 <!--========================================================================-->
@@ -217,7 +221,17 @@ Scheme currently does not provide immutable pairs corresponding to its existing 
 
 <p>R<sup>6</sup>RS segregates <code>set-car!</code> and <code>set-cdr!</code> into a separate library, thus allowing implementations to provide immutable Scheme pairs if this library is not (transitively) imported into a program, and mutable ones if it is.  However, it is not possible to write portable R<sup>6</sup>RS programs that differentiate between mutable and immutable pairs, for example by using immutable pairs most of the time and mutable pairs where necessary.</p>
 
-<p>Because of the Liskov Substitution Principle, it is not possible to treat mutable pairs as either a subtype or a supertype of mutable ones; they must be distinct, and if operations are to apply to both, they can do so only by <em>ad hoc</em> polymorphism of the kind that Scheme traditionally avoids for several reasons, including clarity, efficiency, and flexibility.  This proposal, therefore, treats mutable and immutable pairs separately, while allowing easy conversion from one to the other.</p>
+<p>Because of the Liskov Substitution Principle, it is not possible
+to treat immutable pairs as either a subtype or a supertype of
+mutable ones; they must be distinct, and if operations are to apply
+to both, they can do so only by <em>ad hoc</em> polymorphism of the
+kind that Scheme traditionally avoids for several reasons, including
+clarity, efficiency, and flexibility.
+<ins>(However, see the
+<a href="#Quotation">Quotation</a> section for a case when <em>ad hoc</em>
+polymorphism is actually desirable.)</ins></p>
+This proposal, therefore, treats mutable and immutable pairs
+separately, while allowing easy conversion from one to the other.
 <p>
 Rather than attempting to design this library from scratch, I have chosen the conservative option of modifying <a href="https://srfi.schemers.org/srfi-1/srfi-1.html">SRFI 1</a>.  Consequently, most of the rationale given in that document applies to this one as well.  I have made the following changes:</p>
 
@@ -414,12 +428,22 @@ evaluates to <code>(10 2 3)</code>, the value of
 is not portable, and is in fact an error.
 </p>
 
-<p>This SRFI recommends that implementations that provide both this SRFI and
-immutable quotations should cause quotations to return the same immutable
-pairs that this SRFI describes.  This means that the standard Scheme pair
-and list operations, as well as libraries like SRFI 1 which are built on them,
-should accept both mutable and immutable pairs: thus <code>(car (ilist 1 2))</code>
-should evaluate to <code>1</code>.</p>
+<p>This SRFI <del>recommends</del> <ins>recognizes</ins> that
+implementations that provide both this SRFI and
+immutable quotations <del>should</del> <ins>may choose to</ins> cause quotations
+to return the same immutable pairs that this SRFI describes.
+<ins>In order for existing code to work correctly in such an
+implementation</ins>,
+this means that the standard Scheme pair and list operations,
+as well as libraries like SRFI 1 which are built on them,
+<del>should</del> <ins>must</ins> accept both mutable and immutable
+pairs: thus <ins>in such implementations</ins>
+<code>(car (ilist 1 2))</code> <del>should</del> <ins>must</ins>
+evaluate to <code>1</code>.</p>
+
+<p><ins>However, the converse is not true: if an object is created by
+<code>icons</code>, then it is an error for <code>set-car!</code>
+or <code>set-cdr!</code> to be applied to it.</ins></p>
 
 <p>This SRFI further recommends that <code>read</code> should return mutable
 pairs and lists when reading list structure.  No recommendation is made about the
