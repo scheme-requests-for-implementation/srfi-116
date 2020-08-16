@@ -173,7 +173,11 @@ John Cowan
       <li><b>Post-finalization note #3 (added 2020-05-11):</b>
         Some clarifications have been made to the informative text.
         Removed text looks like <del>this</del>;
-        added text looks like <ins>this</ins>.</li>
+        added text looks like <ins>this</ins>.
+      <li><b>Post-finalization note #4 (added 2020-08-15):</b>
+        Further recommendations have been added to the
+	<a href="#Quotation">Quotations</a> section.
+	Added text looks like <ins>this</ins>.</li>
 </ul>
 
 <!--========================================================================-->
@@ -437,6 +441,16 @@ as well as libraries like SRFI 1 which are built on them,
 should  accept both mutable and immutable pairs: thus 
 <code>(car (ilist 1 2))</code> should evaluate to <code>1</code>.</p>
 
+<p><ins>If this SRFI is implemented on a Scheme system which does in fact
+disallow the modification of quoted pairs, then this SRFI recommends
+that the procedures given here accept such quoted pairs as arguments
+where ipairs are expected.</ins></p>
+
+<p><ins>In addition, this SRFI recommends that (where feasible) procedures
+that expect pairs as arguments also accept ipairs.  If such a call
+returns newly allocated pairs, they will be ordinary pairs; if it
+returns existing pairs, they will be pairs or ipairs as the case may
+be.</ins></p>
 
 <p>This SRFI further recommends that <code>read</code> should return mutable
 pairs and lists when reading list structure.  No recommendation is made about the
