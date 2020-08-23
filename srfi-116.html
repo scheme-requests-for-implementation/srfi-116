@@ -447,10 +447,14 @@ that the procedures given here accept such quoted pairs as arguments
 where ipairs are expected.</ins></p>
 
 <p><ins>In addition, this SRFI recommends that (where feasible) procedures
-that expect pairs as arguments also accept ipairs.  If such a call
-returns newly allocated pairs, they will be ordinary pairs; if it
-returns existing pairs, they will be pairs or ipairs as the case may
-be.</ins></p>
+that expect either pairs or ipairs as arguments accept both pairs and ipairs.
+If this implementation option is chosen, then
+if such a call is defined to return newly allocated pairs
+(such as <code>cons</code>), then it returns ordinary pairs,
+but if it is defined to return newly allocated ipairs
+(such as <code>icons</code>), then it returns ipairs.
+However, if it returns existing objects, they will be pairs or ipairs
+or other objects as the case may be.</ins></p>
 
 <p>This SRFI further recommends that <code>read</code> should return mutable
 pairs and lists when reading list structure.  No recommendation is made about the
