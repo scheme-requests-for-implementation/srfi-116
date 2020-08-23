@@ -225,14 +225,14 @@ Scheme currently does not provide immutable pairs corresponding to its existing 
 
 <p>R<sup>6</sup>RS segregates <code>set-car!</code> and <code>set-cdr!</code> into a separate library, thus allowing implementations to provide immutable Scheme pairs if this library is not (transitively) imported into a program, and mutable ones if it is.  However, it is not possible to write portable R<sup>6</sup>RS programs that differentiate between mutable and immutable pairs, for example by using immutable pairs most of the time and mutable pairs where necessary.</p>
 
-<p>Because of the Liskov Substitution Principle, it is not possible
+<p><del>Because of the Liskov Substitution Principle, it is not possible
 to treat immutable pairs as either a subtype or a supertype of
 mutable ones; they must be distinct, and if operations are to apply
 to both, they can do so only by <em>ad hoc</em> polymorphism of the
 kind that Scheme traditionally avoids for several reasons, including
 clarity, efficiency, and flexibility.
 This proposal, therefore, treats mutable and immutable pairs
-separately, while allowing easy conversion from one to the other.
+separately, while allowing easy conversion from one to the other.</del>
 <p>
 Rather than attempting to design this library from scratch, I have chosen the conservative option of modifying <a href="https://srfi.schemers.org/srfi-1/srfi-1.html">SRFI 1</a>.  Consequently, most of the rationale given in that document applies to this one as well.  I have made the following changes:</p>
 
@@ -427,14 +427,11 @@ Thus whereas the expression
 evaluates to <code>(10 2 3)</code>, the value of
  <code>(let ((foo '(1 2 3))) (set-car! foo 10) foo)</code>
 is not portable, and is in fact an error.
-<ins>However, such pairs are the same type as mutable pairs:
-they answer <code>#t</code> to <code>pair?</code>
-and <code>#f</code> to <code>ipair?</code>.</ins>
 </p>
 
-<p><del>This SRFI recommends that
+<p>This SRFI recommends that
 implementations that provide both this SRFI and
-immutable quotations should cause quotations
+unchangeable quotations should cause quotations
 to return the same immutable pairs that this SRFI describes.
 This means that the standard Scheme pair and list operations,
 as well as libraries like SRFI 1 which are built on them,
@@ -447,10 +444,14 @@ that the procedures given here accept such quoted pairs as arguments
 where ipairs are expected.</ins></p>
 
 <p><ins>In addition, this SRFI recommends that (where feasible) procedures
-that expect pairs as arguments also accept ipairs.  If such a call
-returns newly allocated pairs, they will be ordinary pairs; if it
-returns existing pairs, they will be pairs or ipairs as the case may
-be.</ins></p>
+that expect either pairs or ipairs as arguments accept both pairs and ipairs.
+If this implementation option is chosen, then
+if such a call is defined to return newly allocated pairs
+(such as <code>cons</code>), then it returns ordinary pairs,
+but if it is defined to return newly allocated ipairs
+(such as <code>icons</code>), then it returns ipairs.
+However, if it returns existing objects, they will be pairs or ipairs
+or other objects as the case may be.</ins></p>
 
 <p>This SRFI further recommends that <code>read</code> should return mutable
 pairs and lists when reading list structure.  No recommendation is made about the
@@ -459,7 +460,7 @@ procedures on immutable lists.</p>
 
 <p>To make life easier for Scheme programmers, given that many implementations
 do not provide immutable quotation, the syntax keyword <code>iq</code> is
-provided as part of this SRFI.  It is analogous to <code>quote</code>,
+provided as part of this SRFI.  It is partly analogous to <code>quote</code>,
 taking an arbitrary number of literals and constructing an ilist from them,
 with any pairs in the literals converted to ipairs. It is useful
 for providing constant ipair-based objects.
