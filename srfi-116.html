@@ -2377,6 +2377,14 @@ This procedure allows a procedure to be applied to an ilist.
 </dd>
 
 <dt class="proc-def">
+<a name="make-ipair-comparator"></a>
+<code class="proc-def">make-ipair-comparator</code><var> icar-comparator icdr-comparator -&gt; comparator</var>
+</dt><dd class="proc-def">
+
+    Returns a comparator that compares ipairs first on their icars using <em>icar-comparator</em>. If the icars are equal, it compares the icdrs using <em>icdr-comparator</em>.
+</dd>
+
+<dt class="proc-def">
 <a name="make-icar-comparator"></a>
 <code class="proc-def">make-icar-comparator</code><var> comparator -&gt; comparator</var>
 </dt><dd class="proc-def">

@@ -1006,4 +1006,114 @@
 ;;;;;;;;;;;
 
 (define (ireverse lis) (ifold ipair '() lis))
-				      
+
+;;; Comparators
+;;;;;;;;;;;
+(define (make-ipair-comparator car-comparator cdr-comparator)
+  (make-comparator ipair?
+                   (lambda (ipair1 ipair2)
+                     (and (=? car-comparator (icar ipair1) (icar ipair2))
+                          (=? cdr-comparator (icdr ipair1) (icdr ipair2))))
+                   (lambda (ipair1 ipair2)
+                     (if (=? car-comparator (icar ipair1) (icar ipair2))
+                         (<? cdr-comparator (icdr ipair1) (icdr ipair2))
+                         (<? car-comparator (icar ipair1) (icar ipair2))))
+                   (lambda (ipair)
+                     (modulo (+ (* 31 (comparator-hash car-comparator (icar ipair)))
+                                (comparator-hash cdr-comparator (icdr ipair)))
+                             (hash-bound)))))
+
+(define ipair-comparator (make-ipair-comparator (make-default-comparator) (make-default-comparator)))
+
+(define (make-partial-ipair-comparator proc)
+  (lambda (comparator)
+   (make-comparator ipair?
+                   (lambda (ipair1 ipair2)
+                     (=? comparator (proc ipair1) (proc ipair2)))
+                   (lambda (ipair1 ipair2)
+                     (<? comparator (proc ipair1) (proc ipair2)))
+                   (lambda (ipair)
+                     (modulo (comparator-hash comparator (proc ipair))
+                             (hash-bound))))))
+
+(define make-icar-comparator (make-partial-ipair-comparator icar))
+(define make-icdr-comparator (make-partial-ipair-comparator icdr))
+
+(define (make-ilist-comparator comparator)
+
+  (define (ilist< ilist1 ilist2)
+    (let loop ((ilist1 ilist1)
+               (ilist2 ilist2))
+      (cond
+        ((and (null-ilist? ilist1)
+              (null-ilist? ilist2))
+         #f)
+        ((null-ilist? ilist1) #t)
+        ((null-ilist? ilist2) #f)
+        (else (let ((e1 (icar ilist1))
+                    (e2 (icar ilist2)))
+                (cond
+                  ((<? comparator e1 e2) #t)
+                  ((>? comparator e1 e2) #f)
+                  (else (loop (icdr ilist1)
+                              (icdr ilist2)))))))))
+
+  (define (ilist-hash ilist)
+    (let loop ((sum 0)
+               (lst ilist))
+      (if (null-ilist? lst)
+          (modulo sum (hash-bound))
+          (loop (+ (comparator-hash comparator (icar lst))
+                   (* 31 sum))
+                (icdr lst)))))
+
+  (make-comparator ilist?
+                   (lambda (lst1 lst2)
+                     (ilist= (lambda (a b)
+                               (=? comparator a b))
+                             lst1
+                             lst2))
+                   ilist<
+                   ilist-hash))
+
+(define ilist-comparator (make-ilist-comparator (make-default-comparator)))
+
+
+(define (make-improper-ilist-comparator comparator)
+
+  (define pair-comparison (make-ipair-comparator comparator comparator))
+
+  (define (improper-list-type obj)
+    (cond
+      ((null? obj) 0)
+      ((pair? obj) 1)
+      (else 2)))
+
+  (define (improper-ilist< a b)
+    (let* ((a-type (improper-list-type a))
+           (b-type (improper-list-type b)))
+         (cond
+           ((not (= a-type b-type)) (< a-type b-type))
+           ((null? a) 0)
+           ((ipair? a) (<? pair-comparison a b))
+           (else (<? comparator a b)))))
+
+  (define (improper-ilist= obj1 obj2)
+    (or (and (null? obj1) (null? obj2))
+        (and (ipair? obj1)
+             (ipair? obj2)
+             (=? pair-comparison obj1 obj2))
+        (and (not (ipair? obj1))
+             (not (ipair? obj2))
+             (=? comparator obj1 obj2))))
+
+  (define (improper-ilist-hash obj)
+    (cond
+      ((null? obj) 0)
+      ((ipair? obj) (comparator-hash pair-comparison obj))
+      (else (comparator-hash comparator obj))))
+
+  (make-comparator (lambda _ #t)
+                   improper-ilist=
+                   improper-ilist<
+                   improper-ilist-hash))

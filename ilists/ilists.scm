@@ -1,5 +1,6 @@
 (module srfi-116 ()
   (import scheme)
+  ;(import srfi-128)
   (import (only chicken
     include define-record-type define-record-printer error))
   (export iq)
@@ -28,6 +29,9 @@
   (export pair->ipair ipair->pair list->ilist ilist->list)
   (export tree->itree itree->tree gtree->itree gtree->tree)
   (export iapply)
+  (export ipair-comparator ilist-comparator)
+  (export make-ilist-comparator make-improper-ilist-comparator)
+  (export make-ipair-comparator make-icar-comparator make-icdr-comparator)
   (include "ilists/ilists-base.scm")
   (include "ilists/ilists-impl.scm")
 )
