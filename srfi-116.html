@@ -1,25 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<!-- This commented out text is for the brittle SRFI tools -->
-<!--
-</head>
-<body>
-<H1>Title</H1>
-
-Immutable List Library
-
-<H1>Author</H1>
-
-John Cowan
-
-<H1>Status</H1>
-
-This SRFI is currently in ``final'' status.
--->
-  <title>SRFI 116: Immutable List Library</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="/srfi.css" type="text/css" />
+<!DOCTYPE html>
+<html lang="en-US"><head>
+    <meta charset="utf-8">
+    <link href="/favicon.png" rel="icon" sizes="192x192" type="image/png">
+    <link rel="stylesheet" href="https://srfi.schemers.org/srfi.css" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SRFI 116: Immutable List Library</title>
 
     <!-- Should have a media=all to get, for example, printing to work.
       == But my Netscape will completely ignore the tag if I do that.
@@ -193,9 +178,9 @@ John Cowan
 </li><li><a href="#Rationale">Rationale</a>
 </li><li><a href="#ProcedureIndex">Procedure index</a>
 </li><li><a href="#GeneralDiscussion">General discussion</a></li>
-  <ul>
+<li><ul>
   <li><a href="#ImproperIlists">Improper ilists</a>
-  </li></ul>
+  </li></ul></li>
 <li><a href="#Quotation">Quotation</a></li>
 <li><a href="#TheProcedures">The procedures</a>
   <ul>
@@ -336,10 +321,10 @@ Here is a short list of the procedures provided by this SRFI.
 
 </dd><dt class="proc-index"> Conversion
 </dt><dd class="proc-index">
-<pre class="proc-index"><a href="#pair->ipair">pair->ipair</a>  <a href="#ipair->pair">ipair->pair</a>
-<a href="#list->ilist">list->ilist</a>  <a href="#ilist->list">ilist->list</a>
-<a href="#tree->itree">tree->itree</a>  <a href="#itree->tree">itree->tree</a>
-<a href="#gtree->itree">gtree->itree</a> <a href="#gtree->tree">gtree->tree</a>
+<pre class="proc-index"><a href="#pair-to-ipair">pair->ipair</a>  <a href="#ipair-to-pair">ipair->pair</a>
+<a href="#list-to-ilist">list->ilist</a>  <a href="#ilist-to-list">ilist->list</a>
+<a href="#tree-to-itree">tree->itree</a>  <a href="#itree-to-tree">itree->tree</a>
+<a href="#gtree-to-itree">gtree->itree</a> <a href="#gtree-to-tree">gtree->tree</a>
 </pre>
 
 </dd><dt class="proc-index"> Procedure application
@@ -479,24 +464,24 @@ and omitting the top-level parentheses.</p>
 <p>
 The templates given below obey the following conventions for procedure formals:
 </p><table>
-<tbody><tr valign="baseline"><th align="left"> <var>ilist</var>
+<tbody><tr><th align="left"> <var>ilist</var>
     </th><td> A proper (<code>()</code>-terminated) ilist
-</td></tr><tr valign="baseline"><th align="left"> <var>dilist</var>
+</td></tr><tr><th align="left"> <var>dilist</var>
     </th><td> A proper or dotted ilist
-</td></tr><tr valign="baseline"><th align="left"> <var>ipair</var>
+</td></tr><tr><th align="left"> <var>ipair</var>
     </th><td> An immutable pair
-</td></tr><tr valign="baseline">
+</td></tr><tr>
     <th align="left"> <var>x</var>, <var>y</var>, <var>d</var>, <var>a</var>
     </th><td> Any value
-</td></tr><tr valign="baseline"><th align="left"> <var>object</var>, <var>value</var>
+</td></tr><tr><th align="left"> <var>object</var>, <var>value</var>
     </th><td> Any value
-</td></tr><tr valign="baseline"><th align="left"> <var>n</var>, <var>i</var>
+</td></tr><tr><th align="left"> <var>n</var>, <var>i</var>
     </th><td> A natural number (an integer &gt;= 0)
-</td></tr><tr valign="baseline"><th align="left"> <var>proc</var>
+</td></tr><tr><th align="left"> <var>proc</var>
     </th><td> A procedure
-</td></tr><tr valign="baseline"><th align="left"> <var>pred</var>
+</td></tr><tr><th align="left"> <var>pred</var>
     </th><td> A procedure whose return value is treated as a boolean
-</td></tr><tr valign="baseline"><th align="left"> <var>=</var>
+</td></tr><tr><th align="left"> <var>=</var>
     </th><td> A boolean procedure taking two arguments
 </td></tr></tbody></table>
 
@@ -779,9 +764,7 @@ way that it descends into mutable pairs.
 <!--
 ==== icar icdr
 ============================================================================-->
-<a name="icar"></a>
-<a name="icdr"></a>
-<dt class="proc-def1"><code class="proc-def">icar</code><var> ipair -&gt; value</var>
+<dt id="icar" class="proc-def1"><code id="icdr" class="proc-def">icar</code><var> ipair -&gt; value</var>
 </dt><dt class="proc-defn"><code class="proc-def">icdr</code><var> ipair -&gt; value</var>
 </dt><dd class="proc-def">
 
@@ -2250,10 +2233,10 @@ These procedures convert between mutable and immutable pair structures.
 ==== pair->ipair ipair->pair
 ============================================================================-->
 <dt class="proc-def1">
-<a name="pair->ipair"></a>
+<a name="pair-to-ipair"></a>
 <code class="proc-def">pair->ipair</code><var> pair -&gt; ipair</var>
 </dt><dt class="proc-defn">
-<a name="ipair->pair"></a>
+<a name="ipair-to-pair"></a>
 <code class="proc-def">ipair->pair</code><var> ipair -&gt; pair</var>
 </dt><dd class="proc-def">
 
@@ -2263,10 +2246,10 @@ These procedures convert between mutable and immutable pair structures.
 ==== list->ilist ilist->list
 ============================================================================-->
 </dd><dt class="proc-def1">
-<a name="list->ilist"></a>
+<a name="list-to-ilist"></a>
 <code class="proc-def">list->ilist</code><var> flist -&gt; dilist</var>
 </dt><dt class="proc-defn">
-<a name="ilist->list"></a>
+<a name="ilist-to-list"></a>
 <code class="proc-def">ilist->list</code><var> dilist -&gt; flist</var>
 </dt><dd class="proc-def">
 
@@ -2280,10 +2263,10 @@ These procedures convert between mutable and immutable pair structures.
 ==== pair->ipair ipair->pair
 ============================================================================-->
 </dd><dt class="proc-def1">
-<a name="tree->itree"></a>
+<a name="tree-to-itree"></a>
 <code class="proc-def">tree->itree</code><var> object -&gt; object</var>
 </dt><dt class="proc-defn">
-<a name="itree->tree"></a>
+<a name="itree-to-tree"></a>
 <code class="proc-def">itree->tree</code><var> object -&gt; object</var>
 </dt><dd class="proc-def">
 
@@ -2300,10 +2283,10 @@ These procedures convert between mutable and immutable pair structures.
 ==== pair->ipair ipair->pair
 ============================================================================-->
 </dd><dt class="proc-def1">
-<a name="gtree->itree"></a>
+<a name="gtree-to-itree"></a>
 <code class="proc-def">gtree->itree</code><var> object -&gt; object</var>
 </dt><dt class="proc-defn">
-<a name="gtree->tree"></a>
+<a name="gtree-to-tree"></a>
 <code class="proc-def">gtree->tree</code><var> object -&gt; object</var>
 </dt><dd class="proc-def">
 
