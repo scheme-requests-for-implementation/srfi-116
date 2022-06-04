@@ -32,4 +32,16 @@
   (export make-ipair-comparator make-icar-comparator make-icdr-comparator)
   (include "ilists-base.scm")
   (include "ilists-impl.scm")
+
+  (cond-expand
+   ;; To fullfil the clause about equal? added after finalization on Gauche.
+   ;; Note that Gauche provides its own ilist implementation.  This is for
+   ;; this particular reference implementation.
+   (gauche
+    (import (only (gauche base) define-method object-equal?))
+    (begin
+      (define-method object-equal? ((a <ilist>) (b <ilist>))
+        (and (equal? (icar a) (icar b))
+             (equal? (icdr a) (icdr b))))))
+   (else))
 )
