@@ -1,4 +1,7 @@
-;; -*- Hen -*-
+;;;; -*- Hen -*-
+;;;; SPDX-FileCopyrightText: 2014 John Cowan <cowan@ccil.org>
+;;;;
+;;;; SPDX-License-Identifier: MIT
 
 ((egg "srfi-116.egg")
  ; List of files that should be bundled alongside egg

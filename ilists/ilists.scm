@@ -1,3 +1,7 @@
+;;;; SPDX-FileCopyrightText: 2014 John Cowan <cowan@ccil.org>
+;;;;
+;;;; SPDX-License-Identifier: MIT
+
 (module srfi-116 ()
   (import scheme)
   ;(import srfi-128)

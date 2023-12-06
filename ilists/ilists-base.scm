@@ -1,3 +1,8 @@
+;;;; SPDX-FileCopyrightText: 1998 - 1999 Olin Shivers <shivers@ai.mit.edu>
+;;;; SPDX-FileCopyrightText: 2014 John Cowan <cowan@ccil.org>
+;;;;
+;;;; SPDX-License-Identifier: LicenseRef-SRFI1 AND MIT
+
 ;;;; Enhancements and hooks in Olin's SRFI-1 code to make it work for ilists
 
 ;;; The basic ilist cell

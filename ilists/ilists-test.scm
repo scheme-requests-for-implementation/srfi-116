@@ -1,3 +1,7 @@
+;;;; SPDX-FileCopyrightText: 2014 John Cowan <cowan@ccil.org>
+;;;;
+;;;; SPDX-License-Identifier: MIT
+
 (use test)
 (use srfi-116)
 
