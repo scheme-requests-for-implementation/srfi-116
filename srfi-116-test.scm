@@ -1,4 +1,8 @@
-(import 
+;;;; SPDX-FileCopyrightText: 2014 John Cowan <cowan@ccil.org>
+;;;;
+;;;; SPDX-License-Identifier: MIT
+
+(import
   (scheme base)
   (srfi 128)
   (ilists ilists))
